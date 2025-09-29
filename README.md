@@ -1,195 +1,108 @@
-# 🔍 Fake News Detection API
+🤖 AI-Powered Java Code Reviewer
 
-A **Core Java** fake news detection system with a clean, responsive web interface. This project demonstrates a complete end-to-end solution using pure Java HTTP server, JSON processing, and modern frontend technologies.
+A tool that analyzes Java source code and gives feedback on style, correctness, and best practices. Complete web UI + REST API using pure Java.
 
-![Java](https://img.shields.io/badge/Java-17+-orange.svg)
-![Frontend](https://img.shields.io/badge/Frontend-Vanilla%20JS-yellow.svg)
-![API](https://img.shields.io/badge/API-REST-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+GitHub repo: https://github.com/Tanishqyadav937/AI-Powered-Java-Code-Reviewer.git
 
-## 🚀 Features
+🚀 Features
 
-- **Pure Core Java Backend** - No Spring Framework, just built-in `HttpServer`
-- **RESTful API** - Clean JSON-based endpoints
-- **Modern Web UI** - Responsive, accessible interface
-- **Real-time Analysis** - Instant feedback with loading states
-- **Heuristic Detection** - Pattern-based fake news indicators
-- **Health Monitoring** - API status checking
-- **Error Handling** - Comprehensive error states
-- **CORS Support** - Ready for cross-origin requests
+Core Java backend (no Spring)
 
-## 📋 API Endpoints
+Static + heuristic code analysis
 
-### `POST /detect`
-Analyze news text for authenticity.
+Suggests naming improvements, code formatting, unused imports, etc.
 
-**Request:**
-```json
+RESTful API with JSON responses
+
+Web UI to paste code and get review suggestions live
+
+Error reporting, health check endpoint
+
+📋 API Endpoints
+POST /review
+
+Analyze a block of Java code.
+
+Request:
+
 {
-  "text": "Your news article content here..."
+  "code": "public class sample { public void doStuff(){ System.out.println(\"Hello World\"); }}",
+  "options": {
+    "checkStyle": true,
+    "checkNaming": true
+  }
 }
-```
 
-**Response:**
-```json
+
+Response:
+
 {
-  "prediction": "Fake",
-  "confidence": 0.87,
-  "analysis": "Text contains indicators commonly found in fake news articles",
-  "textLength": 247,
-  "timestamp": "Thu Sep 26 15:30:45 UTC 2024"
+  "issues": [
+    {
+      "line": 1,
+      "message": "Class name 'sample' should start with an uppercase letter.",
+      "type": "NamingConvention"
+    },
+    {
+      "line": 1,
+      "message": "Missing space between method name and parenthesis in 'doStuff()'.",
+      "type": "Formatting"
+    }
+  ],
+  "suggestions": [
+    "Rename class to 'Sample'.",
+    "Add a space before '(' in method declaration for readability."
+  ],
+  "confidence": 0.75,
+  "timestamp": "Mon Sep 29 12:15:00 UTC 2025"
 }
-```
 
-### `GET /health`
-Check API server health status.
+GET /health
 
-**Response:**
-```json
+Health status of the service.
+
+Response:
+
 {
-  "status": "healthy",
-  "timestamp": "Thu Sep 26 15:30:45 UTC 2024",
-  "service": "Fake News Detection API"
+  "status": "up",
+  "uptime": "2 days 5 hours 23 mins",
+  "version": "1.0.2",
+  "timestamp": "Mon Sep 29 12:15:00 UTC 2025"
 }
-```
 
-## 🏗️ Project Structure
-
-```
-java.project/
+🏗 Project Layout
+AI-Powered-Java-Code-Reviewer/
 ├── src/
-│   └── FakeNewsAPI.java      # Main server implementation
+│   ├── CodeReviewerAPI.java
+│   ├── analyzers/
+│   │   ├── NamingAnalyzer.java
+│   │   ├── StyleAnalyzer.java
+│   │   └── ImportAnalyzer.java
 ├── ui/
-│   ├── index.html            # Web interface
-│   ├── styles.css            # UI styling
-│   └── app.js               # Frontend logic
-├── lib/                      # Dependencies (auto-created)
-├── classes/                  # Compiled Java classes (auto-created)
-├── build.ps1                # Build script
-├── run.ps1                  # Run script
-└── README.md                # This file
-```
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+├── lib/
+├── classes/
+├── build.ps1
+├── run.ps1
+└── README.md
 
-## 🔧 Prerequisites
+🔧 Prerequisites
 
-- **Java 11+** (Java 17+ recommended)
-- **PowerShell** (for Windows scripts)
-- **Modern web browser** (Chrome, Firefox, Safari, Edge)
-- **Internet connection** (for downloading Gson dependency)
+Java 11 or newer
 
-## ⚡ Quick Start
+Git (to clone)
 
-### 1. Build the Project
-```powershell
-# Download dependencies and compile Java source
-.\build.ps1
-```
+Powershell / or another terminal for scripts
 
-### 2. Start the Server
-```powershell
-# Launch the API server
-.\run.ps1
-```
+Modern browser
 
-### 3. Open the Web Interface
-```bash
-# Open in your default browser
-start ui\index.html
+⚡ Getting Started
+git clone https://github.com/Tanishqyadav937/AI-Powered-Java-Code-Reviewer.git
+cd AI-Powered-Java-Code-Reviewer
+./build.ps1    # or manual build
+./run.ps1
 
-# Or manually navigate to:
-# file:///C:/Users/TANISHQ/OneDrive/Desktop/java.project/ui/index.html
-```
 
-## 🖥️ Manual Setup (Alternative)
-
-If PowerShell scripts don't work, use these manual commands:
-
-### Build Manually
-```bash
-# Create directories
-mkdir lib classes
-
-# Download Gson (or download manually from Maven Central)
-curl -o lib/gson-2.10.1.jar https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar
-
-# Compile Java source
-javac -cp "lib/*" -d classes src/FakeNewsAPI.java
-```
-
-### Run Manually
-```bash
-# Start the server
-java -cp "classes;lib/*" FakeNewsAPI
-```
-
-## 🌐 Usage
-
-### Web Interface
-1. **Start the server** using `.\run.ps1`
-2. **Open** `ui/index.html` in your browser
-3. **Paste news text** into the textarea
-4. **Click "Analyze Article"** or press `Ctrl+Enter`
-5. **View results** with prediction, confidence, and analysis
-
-### API Usage
-```bash
-# Test with curl
-curl -X POST http://localhost:8080/detect \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Breaking news! Scientists discover miracle cure that doctors hate!"}'
-
-# Check health
-curl http://localhost:8080/health
-```
-
-## 🔍 How It Works
-
-### Backend (Java)
-- **HTTP Server**: Uses Java's built-in `com.sun.net.httpserver.HttpServer`
-- **JSON Processing**: Gson library for serialization/deserialization
-- **Detection Logic**: Heuristic-based analysis using keyword indicators
-- **CORS Support**: Headers for cross-origin requests
-- **Error Handling**: Comprehensive error responses
-
-### Frontend (JavaScript)
-- **Vanilla JS**: No frameworks, pure JavaScript
-- **Responsive Design**: CSS Grid and Flexbox layout
-- **State Management**: Loading, success, and error states
-- **API Integration**: Fetch API for HTTP requests
-- **UX Features**: Character counting, keyboard shortcuts, animations
-
-### Detection Algorithm
-The current implementation uses a simple heuristic approach:
-
-**Fake News Indicators:**
-- "breaking:", "shocking", "you won't believe"
-- "doctors hate", "secret", "conspiracy"
-- "miracle cure", "instant", "guaranteed"
-
-**Real News Indicators:**
-- "according to", "research shows", "study found"
-- "expert says", "data indicates", "report states"
-
-> **Note:** This is a demonstration implementation. In production, you would integrate a trained ML model using libraries like DL4J, Weka, or JPMML.
-
-## 🚀 Enhancement Ideas
-
-### Backend Enhancements
-- [ ] **ML Integration**: Replace heuristics with trained models
-- [ ] **Database Storage**: Store articles and predictions
-- [ ] **Authentication**: Add API key authentication
-- [ ] **Rate Limiting**: Implement request rate limiting
-- [ ] **Logging**: Add comprehensive logging
-
-### Frontend Enhancements
-- [ ] **History**: Store analysis history locally
-- [ ] **Export**: Download results as PDF/CSV
-- [ ] **Bulk Analysis**: Upload and analyze multiple articles
-- [ ] **Dark Mode**: Add theme switching
-- [ ] **PWA**: Make it a Progressive Web App
-
----
-
-**Built with ❤️ using Core Java and Vanilla JavaScript**
-
-*Happy coding! 🚀*
+Then open ui/index.html in browser.
