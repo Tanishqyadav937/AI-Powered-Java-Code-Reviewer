@@ -1,0 +1,15 @@
+com\javacodereviewer\backend\controller\CodeReviewController.class
+com\javacodereviewer\backend\service\LambdaCalculatorService.class
+com\javacodereviewer\backend\model\CodeReviewResponse.class
+com\javacodereviewer\backend\model\CodeReviewRequest.class
+com\javacodereviewer\backend\BackendApplication$1.class
+com\javacodereviewer\backend\service\LambdaCalculatorService$CalculatorResult$Input.class
+com\javacodereviewer\backend\service\LambdaCalculatorService$CalculatorResult$Output.class
+com\javacodereviewer\backend\entity\CodeReview.class
+com\javacodereviewer\backend\repository\CodeReviewRepository.class
+com\javacodereviewer\backend\service\DemoAIService.class
+com\javacodereviewer\backend\controller\CalculatorController.class
+com\javacodereviewer\backend\service\LambdaCalculatorService$CalculatorResult.class
+com\javacodereviewer\backend\controller\CalculatorController$CalculationRequest.class
+com\javacodereviewer\backend\service\AIReviewService.class
+com\javacodereviewer\backend\BackendApplication.class
